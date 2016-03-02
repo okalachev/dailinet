@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Да или Нет</title>
+		<meta name="description" content="Да или Нет?">
+		<meta name="keywords" content="гадание, да, нет, случайность, предсказание, выбор, решение, будущее">
+		<meta property="og:title" content="Да или Нет">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="">
+		<meta property="og:image" content="">
+		<meta property="og:description" content="Да или Нет?">
+		<meta property="og:locale" content="ru_RU">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+		<style type="text/css">
+			body {
+				font-family: Helvetica, sans-serif;
+				color: #323232;
+			}
+			footer {
+				z-index: 4;
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				padding: 10px 20px;
+			}
+			footer, footer a {
+				color: rgba(255, 255, 255, .2);
+			}
+			.yes, .no {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				line-height: 100%;
+				font-size: 80px;
+				user-select: none;
+			}
+			.yes span, .no span {
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				position: absolute;
+			}
+			.yes {
+				left: 0;
+				right: 50%;
+				background: #fffffc;
+				color: #240f20;
+			}
+			.no {
+				right: 0;
+				background: #1f1f24;
+				left: 50%;
+				color: #fffffc;
+			}
+			.find-out {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				z-index: 1;
+				transform: translate(-50%, -50%);
+				font-size: 40px;
+				border: none;
+				border-radius: 5px;
+				background: #e5e5e7;
+				padding: 0px 20px 6px;
+				cursor: pointer;
+			}
+			.find-out::before {
+				display: inline;
+				content: 'или';
+			}
+			.find-out:hover::before {
+				content: 'узнать';
+			}
+			body.process .find-out {
+				opacity: 0;
+				transition: opacity .2s ease, filter .2s ease;
+			}
+			body.process .yes, body.process .no {
+				transition: left 1s ease, right 1s ease, background 1s ease;
+				background: rgba(0, 0, 0, .4);
+			}
+			body.process .yes span, body.process .no span {
+				transition: opacity 1s ease 2s, filter 2.4s ease .6s, -webkit-filter 2.4s ease .6s, color 1s ease;
+				opacity: 0;
+				filter: blur(15px);
+				-webkit-filter: blur(15px);
+				color: gray;
+			}
+			body.process .yes {
+				right: 0;
+			}
+			body.process .no {
+				left: 0;
+			}
+			.result {
+				opacity: 0;
+				position: absolute;
+				text-align: center;
+				top: 50%;
+				transform: translateY(-50%);
+				font-size: 80px;
+				left: 0;
+				right: 0;
+				filter: blur(15px);
+				-webkit-filter: blur(15px);
+			}
+			body.process .result {
+				opacity: 1;
+				z-index: 2;
+				filter: none;
+				-webkit-filter: none;
+				transition: opacity 3s ease 2s, filter 1.8s ease 2s, -webkit-filter 1.8s ease 2s;
+				color: rgba(255, 255, 255, .9);
+				text-decoration: underline;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="yes"><span>Да</span></div>
+		<button class="find-out"></button>
+		<div class="result"></div>
+		<div class="no"><span>Нет</span></div>
+		<footer>
+			Поток истинных случайных чисел предоставлен <a href="http://random.org">random.org</a>
+		</footer>
+		<script type="text/javascript">
+			$('.find-out').click(function() {
+				$('body').addClass('process');
+				findOut();
+			});
+			function findOut() {
+				$.ajax({
+					url: 'https://www.random.org/integers/?num=1&min=0&max=1&col=1&base=10&format=plain&rnd=new'
+				}).done(function(data) {
+					var result = Number(data[0]);
+					$('.result').html(['Нет.', 'Да.'][result]);
+					$('body').addClass('ready');
+				});
+			}
+		</script>
+		<!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter35800225 = new Ya.Metrika({ id:35800225, clickmap:true, trackLinks:true, accurateTrackBounce:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/35800225" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+	</body>
+</html>
