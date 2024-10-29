@@ -153,6 +153,9 @@
 					var result = Number(data[0]);
 					$('.result').html(['Нет.', 'Да.'][result]);
 					$('body').addClass('ready');
+				}).fail(function() {
+					alert('Невероятно, но случайность сломалась. Вам придется принять решение самостоятельно.');
+					$('.result').html('Неизвестно.');
 				});
 				yaCounter35800225.reachGoal('find-out');
 			}
